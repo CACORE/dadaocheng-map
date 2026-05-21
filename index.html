@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>跟著老闆玩大稻埕｜惠通行</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="experience">
+      <aside class="guide-panel" aria-label="分類與地點清單">
+        <button class="panel-toggle" type="button" aria-expanded="true" aria-controls="guideContent">
+          <span>收合</span>
+        </button>
+
+        <div id="guideContent" class="guide-content">
+          <header class="guide-header">
+            <p>惠通行老闆口袋名單</p>
+            <h1>跟著老闆玩大稻埕</h1>
+            <span>地頭蛇帶你挖掘大稻埕</span>
+          </header>
+
+          <nav class="filters" aria-label="地點分類">
+            <button class="filter is-active" data-filter="all" type="button">全部</button>
+            <button class="filter" data-filter="home" type="button">惠通行</button>
+            <button class="filter" data-filter="gift" type="button">伴手禮</button>
+            <button class="filter" data-filter="craft" type="button">風格選物</button>
+            <button class="filter" data-filter="view" type="button">景點</button>
+            <button class="filter" data-filter="cafe" type="button">跑咖</button>
+            <button class="filter" data-filter="bar" type="button">跑吧</button>
+            <button class="filter" data-filter="food" type="button">肚子餓</button>
+            <button class="filter" data-filter="featured" type="button">老闆拍過</button>
+          </nav>
+
+          <label class="search-field" for="placeSearch">
+            <span>搜尋店家</span>
+            <input id="placeSearch" type="search" placeholder="輸入店名、IG、tag" autocomplete="off" />
+          </label>
+
+          <section class="boss-note" aria-label="老闆筆記">
+            <span>老闆說</span>
+            <strong>你還去過哪裡好玩的可以偷偷私訊我唷！</strong>
+          </section>
+
+          <section id="places" class="places" aria-label="推薦地點"></section>
+        </div>
+      </aside>
+
+      <section class="map-area" aria-label="大稻埕真實地圖">
+        <div class="map-title">
+          <p>Dihua Street / Dadaocheng</p>
+          <h2>老闆口袋地圖</h2>
+        </div>
+        <div id="map" aria-label="大稻埕推薦地點地圖"></div>
+        <article id="selectedPlace" class="selected-place" aria-live="polite"></article>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+    <script src="./app.js?v=20260521-4"></script>
+  </body>
+</html>
