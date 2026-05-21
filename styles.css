@@ -670,20 +670,20 @@ button {
   }
 
   .experience {
-    grid-template-columns: 78px minmax(0, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr);
     height: 100dvh;
     min-height: 100dvh;
     overflow: hidden;
   }
 
   .experience.is-panel-collapsed {
-    grid-template-columns: 78px minmax(0, 1fr);
+    grid-template-columns: 58px minmax(0, 1fr);
   }
 
   .guide-panel {
     height: 100dvh;
-    width: 78px;
-    padding: 14px 10px;
+    width: 58px;
+    padding: 12px 7px;
     overflow: visible;
   }
 
@@ -691,8 +691,8 @@ button {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 78px;
-    width: min(330px, calc(100vw - 78px));
+    left: 58px;
+    width: min(330px, calc(100vw - 58px));
     max-height: 100dvh;
     padding: 18px;
     overflow: auto;
@@ -707,10 +707,11 @@ button {
 
   .guide-panel .panel-toggle {
     writing-mode: vertical-rl;
-    min-width: 46px;
-    min-height: 86px;
+    min-width: 36px;
+    min-height: 78px;
     margin: 0 auto;
-    padding: 12px 0;
+    padding: 10px 0;
+    font-size: 0.9rem;
   }
 
   .map-area {
