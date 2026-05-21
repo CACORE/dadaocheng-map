@@ -650,15 +650,44 @@ button {
   background: #fff9eb;
 }
 
+#map .gm-style-iw-c {
+  max-width: min(360px, calc(100vw - 92px)) !important;
+  padding: 18px 20px 16px !important;
+  border-radius: 8px !important;
+}
+
+#map .gm-style-iw-d {
+  overflow: visible !important;
+}
+
+#map .gm-style-iw button:focus,
+#map .gm-style-iw button:focus-visible,
+#map .gm-style-iw a:focus,
+#map .gm-style-iw a:focus-visible {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
 .popup-title {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 1.08rem;
   font-weight: 900;
+  line-height: 1.22;
 }
 
 .popup-copy {
   margin: 0;
   color: var(--muted);
+  font-size: 0.92rem;
   line-height: 1.45;
+}
+
+#map .map-link.compact {
+  min-height: 34px;
+  margin-top: 12px;
+  padding: 0 14px;
+  font-size: 0.92rem;
 }
 
 @media (max-width: 920px) {
@@ -825,5 +854,31 @@ button {
     min-height: 28px;
     padding: 0 8px;
     font-size: 0.72rem;
+  }
+
+  #map .gm-style-iw-c {
+    max-width: calc(100vw - 116px) !important;
+    padding: 16px 18px 14px !important;
+  }
+
+  .popup-title {
+    margin-bottom: 8px;
+    font-size: 1.18rem;
+  }
+
+  .popup-copy {
+    display: -webkit-box;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  #map .map-link.compact {
+    min-height: 36px;
+    margin-top: 12px;
+    padding: 0 16px;
+    font-size: 0.95rem;
   }
 }
