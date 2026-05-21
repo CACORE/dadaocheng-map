@@ -706,7 +706,7 @@ button {
     left: 0;
     width: min(340px, 100vw);
     max-height: 100dvh;
-    padding: 72px 18px 18px;
+    padding: 58px 18px 18px;
     overflow: auto;
     background: var(--panel);
     border-right: 2px solid var(--charcoal);
@@ -720,22 +720,24 @@ button {
   .guide-panel .panel-toggle {
     position: relative;
     z-index: 30;
+    writing-mode: horizontal-tb;
+    min-width: auto;
+    min-height: 32px;
+    margin: 0;
+    padding: 0 12px;
+    border: 1px solid rgba(255, 249, 235, 0.22);
+    box-shadow: 3px 3px 0 rgba(36, 40, 42, 0.2);
+    font-size: 0.78rem;
+    line-height: 1;
+  }
+
+  .guide-panel.is-collapsed .panel-toggle {
     writing-mode: vertical-rl;
     min-width: 36px;
     min-height: 64px;
     margin: 0;
     padding: 9px 0;
-    border: 1px solid rgba(255, 249, 235, 0.22);
-    box-shadow: 3px 3px 0 rgba(36, 40, 42, 0.2);
-    font-size: 0.78rem;
     line-height: 1.05;
-  }
-
-  .guide-panel.is-collapsed .panel-toggle {
-    min-width: 36px;
-    min-height: 64px;
-    margin: 0;
-    padding: 9px 0;
   }
 
   .map-area {
