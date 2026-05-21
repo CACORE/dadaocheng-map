@@ -452,7 +452,6 @@ const categoryNames = {
 };
 
 let map;
-let geocoder;
 let infoWindow;
 const markers = new Map();
 let activeFilter = "all";
@@ -499,7 +498,6 @@ async function initMapProvider() {
       streetViewControl: false,
       fullscreenControl: false,
     });
-    geocoder = new google.maps.Geocoder();
     infoWindow = new google.maps.InfoWindow();
     document.body.classList.add("uses-google-map");
     return;
@@ -679,34 +677,6 @@ function popupHtml(place) {
     <p class="popup-copy">${place.note}</p>
     <a class="map-link compact" href="${mapsUrl(place)}" target="_blank" rel="noreferrer">Google Maps</a>
   `;
-}
-
-function geocodeAddress(address) {
-  return new Promise((resolve, reject) => {
-    geocoder.geocode({ address, region: "TW" }, (results, status) => {
-      if (status === "OK" && results[0]) {
-        resolve(results[0].geometry.location);
-      } else {
-        reject(new Error(`${address} geocode failed: ${status}`));
-      }
-    });
-  });
-}
-
-async function geocodePlacesWithGoogle() {
-  if (!USE_GOOGLE_MAPS || !geocoder) return;
-
-  for (const place of places) {
-    if (!place.address || place.address.includes("待補")) continue;
-
-    try {
-      const location = await geocodeAddress(place.address);
-      place.lat = location.lat();
-      place.lng = location.lng();
-    } catch (error) {
-      console.warn(error);
-    }
-  }
 }
 
 function initMarkers() {
@@ -997,7 +967,6 @@ async function init() {
 
   try {
     await initMapProvider();
-    await geocodePlacesWithGoogle();
   } catch (error) {
     console.warn(error);
     if (USE_GOOGLE_MAPS) {
