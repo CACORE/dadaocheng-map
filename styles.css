@@ -705,14 +705,80 @@ button {
     top: 12px;
     right: 12px;
     max-width: calc(100% - 24px);
+    padding: 10px 13px;
+  }
+
+  .map-title p {
+    margin-bottom: 4px;
+    font-size: 0.68rem;
+  }
+
+  .map-title h2 {
+    font-size: 1.7rem;
   }
 
   .selected-place {
     right: 12px;
     bottom: 12px;
     width: calc(100% - 24px);
-    padding: 14px;
+    max-height: min(48dvh, 360px);
+    padding: 12px;
+    overflow: auto;
     box-shadow: 5px 5px 0 var(--charcoal);
   }
 
+  .selected-kicker {
+    margin-bottom: 5px;
+    font-size: 0.68rem;
+  }
+
+  .selected-place h2 {
+    margin-bottom: 6px;
+    font-size: 1.18rem;
+  }
+
+  .selected-place p {
+    display: -webkit-box;
+    font-size: 0.84rem;
+    line-height: 1.38;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .selected-place .meta {
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .selected-place .tag {
+    padding: 3px 7px;
+    font-size: 0.68rem;
+  }
+
+  .selected-place .ig-link,
+  .selected-place .reel-link,
+  .selected-place .map-link {
+    min-height: 34px;
+    margin-top: 9px;
+    margin-right: 5px;
+    padding: 0 11px;
+    font-size: 0.84rem;
+  }
+
+  .follow-box {
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 9px;
+  }
+
+  .follow-box span {
+    display: none;
+  }
+
+  .follow-box a {
+    min-height: 30px;
+    padding: 0 9px;
+    font-size: 0.76rem;
+  }
 }
