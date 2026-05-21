@@ -11,6 +11,28 @@ const MAP_BOUNDS = {
   north: 25.071,
   east: 121.523,
 };
+const CLEAN_MAP_STYLES = [
+  {
+    featureType: "poi.business",
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "poi.medical",
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "poi.place_of_worship",
+    elementType: "labels.icon",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "transit.station.bus",
+    elementType: "labels.icon",
+    stylers: [{ visibility: "off" }],
+  },
+];
 
 const fallbackPlaces = [
   {
@@ -472,6 +494,7 @@ async function initMapProvider() {
         strictBounds: false,
       },
       gestureHandling: "greedy",
+      styles: CLEAN_MAP_STYLES,
       mapTypeControl: false,
       streetViewControl: false,
       fullscreenControl: false,
