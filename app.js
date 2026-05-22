@@ -695,16 +695,6 @@ function placeMarkHtml(place) {
     : `<span class="place-mark">${place.label}</span>`;
 }
 
-function imageMarkerIcon(place) {
-  const image = placeImageUrl(place);
-  if (!image) return null;
-  return {
-    url: image,
-    scaledSize: new google.maps.Size(42, 42),
-    anchor: new google.maps.Point(21, 21),
-  };
-}
-
 function googleMarkerIcon(place) {
   const colors = {
     home: "#b8442f",
@@ -725,6 +715,59 @@ function googleMarkerIcon(place) {
     scale: 15,
     labelOrigin: new google.maps.Point(0, 0),
   };
+}
+
+function createGoogleImageMarker(place) {
+  class GoogleImageMarker extends google.maps.OverlayView {
+    constructor(markerPlace) {
+      super();
+      this.place = markerPlace;
+      this.position = locationOf(markerPlace);
+      this.clickHandler = null;
+      this.element = null;
+      this.handleClick = () => {
+        if (this.clickHandler) this.clickHandler();
+      };
+      this.isHtmlMarker = true;
+    }
+
+    onAdd() {
+      const element = document.createElement("button");
+      element.type = "button";
+      element.className = `google-image-marker ${this.place.category}`;
+      element.title = this.place.name;
+      element.innerHTML = `<img src="${escapeAttr(placeImageUrl(this.place))}" alt="" />`;
+      element.addEventListener("click", this.handleClick);
+      this.element = element;
+      this.getPanes().overlayMouseTarget.appendChild(element);
+    }
+
+    draw() {
+      if (!this.element) return;
+      const point = this.getProjection().fromLatLngToDivPixel(
+        new google.maps.LatLng(this.position.lat, this.position.lng),
+      );
+      this.element.style.transform = `translate(${point.x}px, ${point.y}px) translate(-50%, -50%)`;
+    }
+
+    onRemove() {
+      if (!this.element) return;
+      this.element.removeEventListener("click", this.handleClick);
+      this.element.remove();
+      this.element = null;
+    }
+
+    addListener(eventName, handler) {
+      if (eventName === "click") this.clickHandler = handler;
+      return {
+        remove: () => {
+          if (this.clickHandler === handler) this.clickHandler = null;
+        },
+      };
+    }
+  }
+
+  return new GoogleImageMarker(place);
 }
 
 function createIcon(place) {
@@ -758,18 +801,21 @@ function initMarkers() {
   places.forEach((place) => {
     let marker;
     if (USE_GOOGLE_MAPS) {
-      const imageIcon = imageMarkerIcon(place);
-      marker = new google.maps.Marker({
-        position: locationOf(place),
-        map,
-        title: place.name,
-        label: imageIcon ? null : {
-          text: place.label,
-          color: "#fff9eb",
-          fontWeight: "900",
-        },
-        icon: imageIcon || googleMarkerIcon(place),
-      });
+      const image = placeImageUrl(place);
+      marker = image
+        ? createGoogleImageMarker(place)
+        : new google.maps.Marker({
+            position: locationOf(place),
+            map,
+            title: place.name,
+            label: {
+              text: place.label,
+              color: "#fff9eb",
+              fontWeight: "900",
+            },
+            icon: googleMarkerIcon(place),
+          });
+      if (image) marker.setMap(map);
       marker.addListener("click", () => {
         setActivePlace(place.id, true);
       });
@@ -900,7 +946,12 @@ function setActivePlace(id, openPopup = false, updateHash = true) {
     map.panTo(locationOf(place));
     if (openPopup) {
       infoWindow.setContent(popupHtml(place));
-      infoWindow.open({ map, anchor: marker });
+      if (marker?.isHtmlMarker) {
+        infoWindow.setPosition(locationOf(place));
+        infoWindow.open(map);
+      } else {
+        infoWindow.open({ map, anchor: marker });
+      }
     } else {
       closeActivePlacePopup();
     }
