@@ -63,6 +63,7 @@ const fallbackPlaces = [
     note: "我的基地。想知道今天迪化街怎麼逛，先來這裡問老闆。",
     tags: ["老闆在這", "南北貨", "Reels"],
     reel_url: "https://www.instagram.com/reel/DW3dbjKTyzC/",
+    image_url: "images/huitong1929.jpg",
     featured: true,
   },
   {
@@ -237,7 +238,7 @@ const fallbackPlaces = [
     address: "台北市大同區迪化街一段322號",
     instagram: "zou.listening.bar",
     stroke: 9,
-    note: "聽音樂、喝一杯，適合把夜晚留給聲音和酒。",
+    note: "喜愛古典樂的你，與店內富藏的威士忌，交織出一場屬於你的交響曲。",
     tags: ["Listening Bar", "音樂"],
   },
   {
@@ -250,7 +251,7 @@ const fallbackPlaces = [
     address: "台北市大同區迪化街一段76號",
     instagram: "ginspirationbar",
     stroke: 12,
-    note: "迪化街上的小酒吧，適合散步後把速度慢下來。",
+    note: "迪化街上琴酒專長的酒吧，適合喜歡喝琴酒的你。",
     tags: ["酒吧", "夜晚"],
   },
   {
@@ -393,7 +394,7 @@ const fallbackPlaces = [
     lat: 25.0536656,
     lng: 121.5100757,
     address: "台北市大同區南京西路251號",
-    instagram: "",
+    instagram: "jomalonelondon",
     stroke: 0,
     note: "英倫香氛走進百年古宅，適合從迪化街入口開始聞一點優雅。",
     tags: ["香氛", "古宅"],
