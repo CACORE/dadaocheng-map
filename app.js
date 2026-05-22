@@ -698,20 +698,10 @@ function placeMarkHtml(place) {
 function imageMarkerIcon(place) {
   const image = placeImageUrl(place);
   if (!image) return null;
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
-      <defs>
-        <clipPath id="avatarClip"><circle cx="23" cy="23" r="17"/></clipPath>
-      </defs>
-      <circle cx="25" cy="25" r="18" fill="rgba(36,40,42,.92)"/>
-      <circle cx="23" cy="23" r="19" fill="#fff9eb" stroke="#24282a" stroke-width="3"/>
-      <image href="${escapeAttr(image)}" x="6" y="6" width="34" height="34" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip)"/>
-    </svg>
-  `.trim();
   return {
-    url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
-    scaledSize: new google.maps.Size(46, 46),
-    anchor: new google.maps.Point(23, 23),
+    url: image,
+    scaledSize: new google.maps.Size(42, 42),
+    anchor: new google.maps.Point(21, 21),
   };
 }
 
