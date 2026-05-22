@@ -673,9 +673,11 @@ function createIcon(place) {
 
 function popupHtml(place) {
   return `
-    <p class="popup-title">${place.name}</p>
-    <p class="popup-copy">${place.note}</p>
-    <a class="map-link compact" href="${mapsUrl(place)}" target="_blank" rel="noreferrer">Google Maps</a>
+    <div class="popup-card">
+      <p class="popup-title">${place.name}</p>
+      <p class="popup-copy">${place.note}</p>
+      <a class="map-link compact" href="${mapsUrl(place)}" target="_blank" rel="noreferrer">Google Maps</a>
+    </div>
   `;
 }
 
