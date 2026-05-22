@@ -584,6 +584,7 @@ function placeFromSheetRow(row) {
     reel_url: row.reel_url || "",
     reel_title: row.reel_title || "",
     reel_cover: row.reel_cover || "",
+    image_url: row.image_url || "",
     featured: ["true", "1", "yes", "是"].includes(String(row.featured ?? "").trim().toLowerCase()),
   };
 }
@@ -639,6 +640,54 @@ function locationOf(place) {
   return USE_GOOGLE_MAPS ? { lat: Number(place.lat), lng: Number(place.lng) } : [place.lat, place.lng];
 }
 
+function assetUrl(path) {
+  if (!path) return "";
+  try {
+    return new URL(path, window.location.href).href;
+  } catch {
+    return path;
+  }
+}
+
+function escapeAttr(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function placeImageUrl(place) {
+  return assetUrl(place.image_url);
+}
+
+function placeMarkHtml(place) {
+  const image = placeImageUrl(place);
+  return image
+    ? `<span class="place-mark has-image"><img src="${escapeAttr(image)}" alt="" loading="lazy" /></span>`
+    : `<span class="place-mark">${place.label}</span>`;
+}
+
+function imageMarkerIcon(place) {
+  const image = placeImageUrl(place);
+  if (!image) return null;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
+      <defs>
+        <clipPath id="avatarClip"><circle cx="23" cy="23" r="17"/></clipPath>
+      </defs>
+      <circle cx="25" cy="25" r="18" fill="rgba(36,40,42,.92)"/>
+      <circle cx="23" cy="23" r="19" fill="#fff9eb" stroke="#24282a" stroke-width="3"/>
+      <image href="${escapeAttr(image)}" x="6" y="6" width="34" height="34" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip)"/>
+    </svg>
+  `.trim();
+  return {
+    url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+    scaledSize: new google.maps.Size(46, 46),
+    anchor: new google.maps.Point(23, 23),
+  };
+}
+
 function googleMarkerIcon(place) {
   const colors = {
     home: "#b8442f",
@@ -662,9 +711,10 @@ function googleMarkerIcon(place) {
 }
 
 function createIcon(place) {
+  const image = placeImageUrl(place);
   return L.divIcon({
     className: "",
-    html: `<div class="map-pin ${place.category}"><span>${place.label}</span></div>`,
+    html: `<div class="map-pin ${place.category} ${image ? "has-image" : ""}">${image ? `<img src="${escapeAttr(image)}" alt="" />` : `<span>${place.label}</span>`}</div>`,
     iconSize: [42, 42],
     iconAnchor: [21, 42],
     popupAnchor: [0, -38],
@@ -691,16 +741,17 @@ function initMarkers() {
   places.forEach((place) => {
     let marker;
     if (USE_GOOGLE_MAPS) {
+      const imageIcon = imageMarkerIcon(place);
       marker = new google.maps.Marker({
         position: locationOf(place),
         map,
         title: place.name,
-        label: {
+        label: imageIcon ? null : {
           text: place.label,
           color: "#fff9eb",
           fontWeight: "900",
         },
-        icon: googleMarkerIcon(place),
+        icon: imageIcon || googleMarkerIcon(place),
       });
       marker.addListener("click", () => {
         setActivePlace(place.id, true);
@@ -763,7 +814,7 @@ function renderPlaces() {
       const tags = place.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
       return `
         <article class="place ${place.id === activePlaceId ? "is-active" : ""}" data-id="${place.id}" data-category="${place.category}" tabindex="0">
-          <span class="place-mark">${place.label}</span>
+          ${placeMarkHtml(place)}
           <div>
             <h3>${place.name}</h3>
             ${instagramLink(place, true)}

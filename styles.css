@@ -253,12 +253,26 @@ button {
 .place-mark {
   display: grid;
   place-items: center;
+  flex: 0 0 42px;
   width: 42px;
   height: 42px;
+  overflow: hidden;
   color: #fff9eb;
   border-radius: 999px;
   background: var(--leaf);
   font-weight: 900;
+}
+
+.place-mark.has-image {
+  border: 2px solid var(--charcoal);
+  background: #fff9eb;
+}
+
+.place-mark img,
+.map-pin img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .place[data-category="home"] .place-mark {
@@ -640,6 +654,7 @@ button {
   place-items: center;
   width: 42px;
   height: 42px;
+  overflow: hidden;
   color: #fff9eb;
   background: var(--leaf);
   border: 3px solid var(--charcoal);
@@ -648,6 +663,10 @@ button {
   font-size: 0.92rem;
   font-weight: 950;
   transform: rotate(-7deg);
+}
+
+.map-pin.has-image {
+  background: #fff9eb;
 }
 
 .map-pin span {
