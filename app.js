@@ -798,6 +798,7 @@ function renderSelectedPlace() {
   if (!place) return;
   const tags = place.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
   document.querySelector("#selectedPlace").innerHTML = `
+    <button class="selected-close" type="button" aria-label="關閉店家資訊">×</button>
     <div class="selected-kicker">${hasReel(place) ? "老闆拍過" : categoryNames[place.category]}</div>
     <h2>${place.name}</h2>
     <p>${place.note}</p>
@@ -811,6 +812,7 @@ function renderSelectedPlace() {
     </div>
     <a class="map-link" href="${mapsUrl(place)}" target="_blank" rel="noreferrer">用 Google Maps 打開</a>
   `;
+  document.querySelector("#selectedPlace").classList.remove("is-hidden");
 }
 
 function setActivePlace(id, openPopup = false, updateHash = true) {
@@ -938,6 +940,12 @@ document.querySelector("#placeSearch").addEventListener("input", (event) => {
 
 panelToggle.addEventListener("click", () => {
   setPanelCollapsed(!panel.classList.contains("is-collapsed"));
+});
+
+document.querySelector("#selectedPlace").addEventListener("click", (event) => {
+  if (!event.target.closest(".selected-close")) return;
+  document.querySelector("#selectedPlace").classList.add("is-hidden");
+  closeActivePlacePopup();
 });
 
 window.matchMedia("(max-width: 920px)").addEventListener("change", (event) => {

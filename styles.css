@@ -501,14 +501,40 @@ button {
     transform 160ms ease;
 }
 
+.selected-place.is-hidden,
 .experience:not(.is-panel-collapsed) .selected-place {
   opacity: 0;
   transform: translateY(18px);
   pointer-events: none;
 }
 
+.selected-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  place-items: center;
+  color: var(--muted);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.selected-close:hover {
+  color: var(--ink);
+  background: rgba(36, 40, 42, 0.08);
+}
+
 .selected-place h2 {
   margin-bottom: 8px;
+  padding-right: 34px;
   font-size: 1.5rem;
 }
 
@@ -652,8 +678,26 @@ button {
 
 #map .gm-style-iw-c {
   max-width: min(360px, calc(100vw - 92px)) !important;
-  padding: 18px 20px 16px !important;
+  padding: 16px 20px 16px !important;
   border-radius: 8px !important;
+}
+
+#map .gm-style-iw-chr {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 2 !important;
+  height: 30px !important;
+}
+
+#map .gm-style-iw-ch {
+  display: none !important;
+}
+
+#map .gm-ui-hover-effect {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
 }
 
 #map .gm-style-iw-d {
@@ -669,7 +713,7 @@ button {
 }
 
 .popup-title {
-  margin: 0 0 8px;
+  margin: 0 34px 7px 0;
   color: var(--ink);
   font-size: 1.08rem;
   font-weight: 900;
@@ -796,9 +840,17 @@ button {
     bottom: max(10px, env(safe-area-inset-bottom));
     width: calc(100% - 20px);
     max-height: min(36dvh, 270px);
-    padding: 10px;
+    padding: 12px;
     overflow: auto;
     box-shadow: 4px 4px 0 var(--charcoal);
+  }
+
+  .selected-close {
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    font-size: 1.25rem;
   }
 
   .selected-kicker {
@@ -808,6 +860,7 @@ button {
 
   .selected-place h2 {
     margin-bottom: 5px;
+    padding-right: 32px;
     font-size: 1.08rem;
   }
 
@@ -858,11 +911,11 @@ button {
 
   #map .gm-style-iw-c {
     max-width: calc(100vw - 116px) !important;
-    padding: 16px 18px 14px !important;
+    padding: 14px 16px 14px !important;
   }
 
   .popup-title {
-    margin-bottom: 8px;
+    margin: 0 32px 7px 0;
     font-size: 1.18rem;
   }
 
