@@ -564,6 +564,18 @@ button {
   font-size: 1.5rem;
 }
 
+.selected-image {
+  float: left;
+  width: 58px;
+  height: 58px;
+  margin: 0 12px 8px 0;
+  object-fit: cover;
+  border: 2px solid var(--charcoal);
+  border-radius: 999px;
+  background: #fff9eb;
+  box-shadow: 3px 3px 0 var(--charcoal);
+}
+
 .follow-box {
   display: flex;
   flex-wrap: wrap;
@@ -916,6 +928,13 @@ button {
 
   .selected-close::before {
     font-size: 1.08rem;
+  }
+
+  .selected-image {
+    width: 44px;
+    height: 44px;
+    margin: 0 9px 6px 0;
+    box-shadow: 2px 2px 0 var(--charcoal);
   }
 
   .selected-kicker {

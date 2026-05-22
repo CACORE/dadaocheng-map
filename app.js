@@ -877,8 +877,10 @@ function renderSelectedPlace() {
   const place = places.find((item) => item.id === activePlaceId);
   if (!place) return;
   const tags = place.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+  const image = placeImageUrl(place);
   document.querySelector("#selectedPlace").innerHTML = `
     <button class="selected-close" type="button" aria-label="關閉店家資訊">×</button>
+    ${image ? `<img class="selected-image" src="${escapeAttr(image)}" alt="" />` : ""}
     <div class="selected-kicker">${hasReel(place) ? "老闆拍過" : categoryNames[place.category]}</div>
     <h2>${place.name}</h2>
     <p>${place.note}</p>
