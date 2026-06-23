@@ -134,6 +134,7 @@ const fallbackPlaces = [
     stroke: 6,
     note: "老字號漢餅與甜點，適合買一盒把大稻埕的甜味帶走。",
     tags: ["漢餅", "甜點"],
+    reel_url: "https://www.instagram.com/p/DYo3PtnBqKo/",
   },
   {
     id: "dachun",
@@ -147,6 +148,7 @@ const fallbackPlaces = [
     stroke: 3,
     note: "香氣很有記憶點，從南北貨轉到生活選物，畫面會突然變得很乾淨。",
     tags: ["香皂", "生活感"],
+    reel_url: "https://www.instagram.com/p/DZUnJQIpnAf/",
   },
   {
     id: "mac",
@@ -201,6 +203,7 @@ const fallbackPlaces = [
     stroke: 12,
     note: "日式和菓子老店，草莓大福、最中都很適合當作甜甜的伴手禮。",
     tags: ["和菓子", "草莓大福"],
+    reel_url: "https://www.instagram.com/p/DYo3PtnBqKo/",
   },
   {
     id: "nature",
